@@ -323,4 +323,123 @@
         #define TIM11_CCR1 REG32(TIM11_BASE + TIMx_CCR1_OFFSET)
         #define TIM11_OR REG32(TIM11_BASE + TIM11_OR_OFFSET)
 
+
+
+        /*-----NVIC REGISTERS -----*/ // NESTED VECTORED INTERRUPT CONTROLLER
+
+    #define NVIC_ISRx_BASE 0xE000E000
+
+            //eanbling interrupts
+            #define NVIC_ISR0_OFFSET 0x100
+            #define NVIC_ISR1_OFFSET 0x104
+            #define NVIC_ISR2_OFFSET 0x108
+            #define NVIC_ISR3_OFFSET 0x10C
+            #define NVIC_ISR4_OFFSET 0x110
+            #define NVIC_ISR5_OFFSET 0x114
+            #define NVIC_ISR6_OFFSET 0x118
+            #define NVIC_ISR7_OFFSET 0x11C           
+
+            #define NVIC_ICER0_OFFSET 0x180
+            #define NVIC_ICER1_OFFSET 0x184
+            #define NVIC_ICER2_OFFSET 0x188
+            #define NVIC_ICER3_OFFSET 0x18C
+            #define NVIC_ICER4_OFFSET 0x190
+            #define NVIC_ICER5_OFFSET 0x194
+            #define NVIC_ICER6_OFFSET 0x198
+            #define NVIC_ICER7_OFFSET 0x19C
+
+            #define NVIC_ISPR0_OFFSET 0x200
+            #define NVIC_ISPR1_OFFSET 0x204
+            #define NVIC_ISPR2_OFFSET 0x208
+            #define NVIC_ISPR3_OFFSET 0x20C
+            #define NVIC_ISPR4_OFFSET 0x210
+            #define NVIC_ISPR5_OFFSET 0x214
+            #define NVIC_ISPR6_OFFSET 0x218
+            #define NVIC_ISPR7_OFFSET 0x21C
+
+            #define NVIC_ICPR0_OFFSET 0x280
+            #define NVIC_ICPR1_OFFSET 0x284
+            #define NVIC_ICPR2_OFFSET 0x288
+            #define NVIC_ICPR3_OFFSET 0x28C
+            #define NVIC_ICPR4_OFFSET 0x290
+            #define NVIC_ICPR5_OFFSET 0x294
+            #define NVIC_ICPR6_OFFSET 0x298
+            #define NVIC_ICPR7_OFFSET 0x29C
+
+            #define NVIC_IABR0_OFFSET 0x300
+            #define NVIC_IABR1_OFFSET 0x304
+            #define NVIC_IABR2_OFFSET 0x308
+            #define NVIC_IABR3_OFFSET 0x30C
+            #define NVIC_IABR4_OFFSET 0x310
+            #define NVIC_IABR5_OFFSET 0x314
+            #define NVIC_IABR6_OFFSET 0x318
+            #define NVIC_IABR7_OFFSET 0x31C
+
+            //setting priority of interrupts
+            #define NVIC_IPR0_OFFSET 0x400
+            #define NVIC_IPR1_OFFSET 0x404
+            #define NVIC_IPR2_OFFSET 0x408
+            #define NVIC_IPR3_OFFSET 0x40C
+            #define NVIC_IPR4_OFFSET 0x410
+            #define NVIC_IPR5_OFFSET 0x414
+            #define NVIC_IPR6_OFFSET 0x418
+            #define NVIC_IPR7_OFFSET 0x41C
+
+            #define NVIC_STIR_OFFSET 0xE00
+
+        #define NVIC_ISR0 REG32(NVIC_ISRx_BASE + NVIC_ISR0_OFFSET)
+        #define NVIC_ISR1 REG32(NVIC_ISRx_BASE + NVIC_ISR1_OFFSET)
+        #define NVIC_ISR2 REG32(NVIC_ISRx_BASE + NVIC_ISR2_OFFSET)
+        #define NVIC_ISR3 REG32(NVIC_ISRx_BASE + NVIC_ISR3_OFFSET)
+        #define NVIC_ISR4 REG32(NVIC_ISRx_BASE + NVIC_ISR4_OFFSET)
+        #define NVIC_ISR5 REG32(NVIC_ISRx_BASE + NVIC_ISR5_OFFSET)
+        #define NVIC_ISR6 REG32(NVIC_ISRx_BASE + NVIC_ISR6_OFFSET)
+        #define NVIC_ISR7 REG32(NVIC_ISRx_BASE + NVIC_ISR7_OFFSET)
+
+        #define NVIC_ICER0 REG32(NVIC_ISRx_BASE + NVIC_ICER0_OFFSET)
+        #define NVIC_ICER1 REG32(NVIC_ISRx_BASE + NVIC_ICER1_OFFSET)
+        #define NVIC_ICER2 REG32(NVIC_ISRx_BASE + NVIC_ICER2_OFFSET)
+        #define NVIC_ICER3 REG32(NVIC_ISRx_BASE + NVIC_ICER3_OFFSET)
+        #define NVIC_ICER4 REG32(NVIC_ISRx_BASE + NVIC_ICER4_OFFSET)
+        #define NVIC_ICER5 REG32(NVIC_ISRx_BASE + NVIC_ICER5_OFFSET)
+        #define NVIC_ICER6 REG32(NVIC_ISRx_BASE + NVIC_ICER6_OFFSET)
+        #define NVIC_ICER7 REG32(NVIC_ISRx_BASE + NVIC_ICER7_OFFSET)
+
+        #define NVIC_ISPR0 REG32(NVIC_ISRx_BASE + NVIC_ISPR0_OFFSET)
+        #define NVIC_ISPR1 REG32(NVIC_ISRx_BASE + NVIC_ISPR1_OFFSET)
+        #define NVIC_ISPR2 REG32(NVIC_ISRx_BASE + NVIC_ISPR2_OFFSET)
+        #define NVIC_ISPR3 REG32(NVIC_ISRx_BASE + NVIC_ISPR3_OFFSET)
+        #define NVIC_ISPR4 REG32(NVIC_ISRx_BASE + NVIC_ISPR4_OFFSET)
+        #define NVIC_ISPR5 REG32(NVIC_ISRx_BASE + NVIC_ISPR5_OFFSET)
+        #define NVIC_ISPR6 REG32(NVIC_ISRx_BASE + NVIC_ISPR6_OFFSET)
+        #define NVIC_ISPR7 REG32(NVIC_ISRx_BASE + NVIC_ISPR7_OFFSET)
+
+        #define NVIC_ICPR0 REG32(NVIC_ISRx_BASE + NVIC_ICPR0_OFFSET)
+        #define NVIC_ICPR1 REG32(NVIC_ISRx_BASE + NVIC_ICPR1_OFFSET)
+        #define NVIC_ICPR2 REG32(NVIC_ISRx_BASE + NVIC_ICPR2_OFFSET)
+        #define NVIC_ICPR3 REG32(NVIC_ISRx_BASE + NVIC_ICPR3_OFFSET)
+        #define NVIC_ICPR4 REG32(NVIC_ISRx_BASE + NVIC_ICPR4_OFFSET)
+        #define NVIC_ICPR5 REG32(NVIC_ISRx_BASE + NVIC_ICPR5_OFFSET)
+        #define NVIC_ICPR6 REG32(NVIC_ISRx_BASE + NVIC_ICPR6_OFFSET)
+        #define NVIC_ICPR7 REG32(NVIC_ISRx_BASE + NVIC_ICPR7_OFFSET)
+
+        #define NVIC_IABR0 REG32(NVIC_ISRx_BASE + NVIC_IABR0_OFFSET)
+        #define NVIC_IABR1 REG32(NVIC_ISRx_BASE + NVIC_IABR1_OFFSET)
+        #define NVIC_IABR2 REG32(NVIC_ISRx_BASE + NVIC_IABR2_OFFSET)
+        #define NVIC_IABR3 REG32(NVIC_ISRx_BASE + NVIC_IABR3_OFFSET)
+        #define NVIC_IABR4 REG32(NVIC_ISRx_BASE + NVIC_IABR4_OFFSET)
+        #define NVIC_IABR5 REG32(NVIC_ISRx_BASE + NVIC_IABR5_OFFSET)
+        #define NVIC_IABR6 REG32(NVIC_ISRx_BASE + NVIC_IABR6_OFFSET)
+        #define NVIC_IABR7 REG32(NVIC_ISRx_BASE + NVIC_IABR7_OFFSET)
+
+        #define NVIC_IPR0 REG32(NVIC_ISRx_BASE + NVIC_IPR0_OFFSET)
+        #define NVIC_IPR1 REG32(NVIC_ISRx_BASE + NVIC_IPR1_OFFSET)
+        #define NVIC_IPR2 REG32(NVIC_ISRx_BASE + NVIC_IPR2_OFFSET)
+        #define NVIC_IPR3 REG32(NVIC_ISRx_BASE + NVIC_IPR3_OFFSET)
+        #define NVIC_IPR4 REG32(NVIC_ISRx_BASE + NVIC_IPR4_OFFSET)
+        #define NVIC_IPR5 REG32(NVIC_ISRx_BASE + NVIC_IPR5_OFFSET)
+        #define NVIC_IPR6 REG32(NVIC_ISRx_BASE + NVIC_IPR6_OFFSET)
+        #define NVIC_IPR7 REG32(NVIC_ISRx_BASE + NVIC_IPR7_OFFSET)
+
+        #define NVIC_STIR REG32(NVIC_ISRx_BASE + NVIC_STIR_OFFSET)
 #endif

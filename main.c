@@ -44,43 +44,28 @@ registers needed for led blink on PC13 GPIO
 
 #include "register.h"
 #include "gpio.h"
-
-
-
-static void delay(uint32_t count);
-
-
-
-
-
+#include "timer9.h"
 
 
 static void setup()
 {
     GPIO_PER_EN('C'); // enableing GPIOC peripheral
-
+    
     //configuration left default with empty registers
 
 
     // setting PC13 to HIGH to disable led
     GPIO_WRITE('C', 13, 1);
     GPIO_PIN_MODE('C', 13, 'O'); 
+
+    TIM9_SETUP();
+
+    TIM9_START();
 }
 
 static void loop()
 {
-    GPIO_WRITE('C', 13, 0);
-    delay(1000000);
-    GPIO_WRITE('C', 13, 1);
-    delay(1000000);
-}
-
-static void delay(uint32_t count)
-{
-    for(uint32_t i = 0; i < count; i++)
-    {
-        __asm__("nop");
-    }
+    __asm__("nop");
 }
 
 int main(void)

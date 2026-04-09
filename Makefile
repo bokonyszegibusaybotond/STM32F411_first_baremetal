@@ -26,7 +26,7 @@ SIZE     = $(TOOLCHAIN_PREFIX)size
 # ============================================================================
 
 # Source files
-SOURCES  = main.c startup.c gpio.c
+SOURCES  = main.c startup.c gpio.c timer9.c
 
 # Build output directory
 BUILD_DIR = build-destination
@@ -127,7 +127,8 @@ flash: $(TARGET_BIN)
 .PHONY: clean
 clean:
 	@echo "Cleaning build artifacts..."
-	-del /Q /F $(subst /,\,$(OBJECTS)) $(subst /,\,$(TARGET_ELF)) $(subst /,\,$(TARGET_BIN)) 2>nul
+#	-del /Q /F $(subst /,\,$(OBJECTS)) $(subst /,\,$(TARGET_ELF)) $(subst /,\,$(TARGET_BIN)) 2>nul
+	-rm -f $(OBJECTS) $(TARGET_ELF) $(TARGET_BIN)
 	@echo "✓ Clean complete!"
 
 # ============================================================================
@@ -146,7 +147,6 @@ help:
 	@echo "STM32F411 Bare Metal Build System"
 	@echo ""
 	@echo "Targets:"
-	@echo "  make build       - Compile, link, generate binary (default)"
 	@echo "  make flash       - Upload binary via dfu-util"
 	@echo "  make clean       - Remove generated files"
 	@echo "  make rebuild     - Clean then build"
