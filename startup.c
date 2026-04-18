@@ -26,6 +26,7 @@ void SysTick_Handler(void);
 typedef void (*isr_handler_t)(void);
 
 void TIM1_BRK_TIM9_IRQHandler(void);
+void USART1_IRQHandler(void);
 #if defined(__GNUC__)
 #define SECTION_ATTR(name) __attribute__((section(name)))
 #else
@@ -57,7 +58,7 @@ const isr_handler_t vector_table[] = {
 	Default_Handler, Default_Handler, Default_Handler, Default_Handler, TIM1_BRK_TIM9_IRQHandler,
 	Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
 	Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
-	Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
+	Default_Handler, Default_Handler, USART1_IRQHandler, Default_Handler, Default_Handler,
 	Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
 	Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
 	Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,

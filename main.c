@@ -45,11 +45,13 @@ registers needed for led blink on PC13 GPIO
 #include "register.h"
 #include "gpio.h"
 #include "timer9.h"
+#include "usart1.h"
 
 
 static void setup()
 {
     GPIO_PER_EN('C'); // enableing GPIOC peripheral
+    GPIO_PER_EN('A');
     
     //configuration left default with empty registers
 
@@ -57,10 +59,20 @@ static void setup()
     // setting PC13 to HIGH to disable led
     GPIO_WRITE('C', 13, 1);
     GPIO_PIN_MODE('C', 13, 'O'); 
+    GPIO_PIN_MODE('A', 9, 'L');
+    GPIO_PIN_MODE('A', 10, 'L');
+
 
     TIM9_SETUP();
 
     TIM9_START();
+
+    USART1_INIT();
+    uint8_t tosend[] = "Hello World!\n";
+    USART1_SEND_MSG(tosend, sizeof(tosend));
+
+
+
 }
 
 static void loop()

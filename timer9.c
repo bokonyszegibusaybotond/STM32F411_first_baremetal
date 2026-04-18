@@ -89,13 +89,14 @@ void TIM9_SETUP(void)
     TIM9_PSC = 15999;
     // 1 kHz / (999 + 1) = 1 Hz update event (toggle every interrupt => 0.5 Hz blink)
     TIM9_ARR = 999;
-
+    /*
     // Generate an update event so PSC/ARR are loaded immediately
     TIM9_EGR |= (1u << 0u);
     // Clear pending update flag before enabling interrupt
     TIM9_SR &= ~(1u << 0u);
-
-    NVIC_ISR0 |= (1 << 24); //enabling TIM1_BRK_TIM9_IRQ interrupt on position 24
+    */
+    
+    NVIC_ISER0 |= (1 << 24); //enabling TIM1_BRK_TIM9_IRQ interrupt on position 24
     TIM9_DIER |= 1; //flipping bit 0 update interrupt enable bit
 }
 
