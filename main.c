@@ -68,16 +68,18 @@ static void setup()
     TIM9_START();
 
     USART1_INIT();
-    uint8_t tosend[] = "Hello World!\n";
-    USART1_SEND_MSG(tosend, sizeof(tosend));
+    
+    
 
 
 
 }
 
+uint8_t tosend[] = "Hello World!\n";
+
 static void loop()
 {
-    __asm__("nop");
+    USART1_SEND_MSG(tosend, sizeof(tosend));
 }
 
 int main(void)
