@@ -27,6 +27,7 @@ typedef void (*isr_handler_t)(void);
 
 void TIM1_BRK_TIM9_IRQHandler(void);
 void USART1_IRQHandler(void);
+void EXTI0_IRQHandler(void);
 #if defined(__GNUC__)
 #define SECTION_ATTR(name) __attribute__((section(name)))
 #else
@@ -52,7 +53,7 @@ const isr_handler_t vector_table[] = {
 	PendSV_Handler,
 	SysTick_Handler,
 	Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
-	Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
+	Default_Handler, EXTI0_IRQHandler, Default_Handler, Default_Handler, Default_Handler,
 	Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
 	Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
 	Default_Handler, Default_Handler, Default_Handler, Default_Handler, TIM1_BRK_TIM9_IRQHandler,

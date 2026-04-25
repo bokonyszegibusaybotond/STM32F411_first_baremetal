@@ -26,7 +26,7 @@ SIZE     = $(TOOLCHAIN_PREFIX)size
 # ============================================================================
 
 # Source files
-SOURCES  = main.c startup.c gpio.c timer9.c usart1.c
+SOURCES  = main.c startup.c gpio.c timer9.c usart1.c extint.c
 
 # Build output directory
 BUILD_DIR = build-destination

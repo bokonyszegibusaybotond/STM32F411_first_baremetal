@@ -33,6 +33,10 @@ static int cnt = 0;
 
 void USART1_SEND_MSG(uint8_t *msg, uint8_t len)
 {
+    if(len > 64 || len == 0 || !(USART1_SR & (1u << 6u))) // validating msg length and checking TC bit 
+    {
+        return;
+    }
     msg_len = len;
 
     //enabling transmit
@@ -54,6 +58,7 @@ void USART1_SEND_MSG(uint8_t *msg, uint8_t len)
         USART1_CR1 |= (1u << 7u); 
         cnt = 1;
     }
+    return;
 }
 
 
@@ -61,7 +66,7 @@ void USART1_IRQHandler(void)
 {
     if(!(USART1_SR & (1u << 6u)))
     {
-        if(USART1_SR & (1u << 7u) && cnt < msg_len) // STATUS REGISTER TXE
+        if(USART1_SR & (1u << 7u) && cnt < (msg_len-1)) // STATUS REGISTER TXE
         {
             USART1_DR = buffer[cnt]; // TXE flag is reset by writing to DR
             cnt++;
@@ -69,8 +74,6 @@ void USART1_IRQHandler(void)
     }
     else
     {
-        USART1_SR &= ~(1u << 6u); // reset TC flag 
-
         //disabling transmit
         USART1_CR1 &= ~(1u << 3u); 
 
@@ -83,5 +86,3 @@ void USART1_SENDBYTE(uint8_t MES)
 {
     USART1_DR = MES;
 }
-
-
