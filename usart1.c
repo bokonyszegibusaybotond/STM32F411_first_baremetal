@@ -20,7 +20,9 @@ void USART1_INIT(void)
     //setting baud rate to 9600
     USART1_BRR = 3 + (104 << 4u);
 
-    
+    USART1_CR1 |= (1u << 2u); //enabling recieve
+
+    USART1_CR1 |= (1u << 5u); // enabling recieve not empty interrupt enable
 
 }
 
@@ -64,21 +66,30 @@ void USART1_SEND_MSG(uint8_t *msg, uint8_t len)
 
 void USART1_IRQHandler(void)
 {
-    if(!(USART1_SR & (1u << 6u)))
+    if(!(USART1_SR & (1u << 5u)))
     {
-        if(USART1_SR & (1u << 7u) && cnt < (msg_len-1)) // STATUS REGISTER TXE
+        if(!(USART1_SR & (1u << 6u)))
         {
-            USART1_DR = buffer[cnt]; // TXE flag is reset by writing to DR
-            cnt++;
+            if(USART1_SR & (1u << 7u) && cnt < (msg_len-1)) // STATUS REGISTER TXE
+            {
+                USART1_DR = buffer[cnt]; // TXE flag is reset by writing to DR
+                cnt++;
+            }
+        }
+        else
+        {
+            //disabling transmit
+            USART1_CR1 &= ~(1u << 3u); 
+
+            //resetting TXEIE bit for interrupt
+            USART1_CR1 &= ~(1u << 7u); 
         }
     }
     else
     {
-        //disabling transmit
-        USART1_CR1 &= ~(1u << 3u); 
+        uint8_t rx = USART1_DR;
 
-        //resetting TXEIE bit for interrupt
-        USART1_CR1 &= ~(1u << 7u); 
+        USART1_SEND_MSG(&rx, sizeof(rx));
     }
 }
 
