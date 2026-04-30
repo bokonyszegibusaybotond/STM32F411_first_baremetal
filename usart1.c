@@ -29,7 +29,7 @@ void USART1_INIT(void)
 
 
 /*-----send string-----*/
-static uint8_t buffer[64];
+static uint8_t TXbuffer[64];
 static uint8_t msg_len;
 static int cnt = 0;
 
@@ -49,12 +49,12 @@ void USART1_SEND_MSG(uint8_t *msg, uint8_t len)
 
     for(int i = 0; i < len; i++)
     {
-        buffer[i] = msg[i];
+        TXbuffer[i] = msg[i];
     }
 
     if(USART1_SR & (1u << 7u))
     {
-        USART1_DR = buffer[0];
+        USART1_DR = TXbuffer[0];
         
         //setting TXEIE bit for interrupt
         USART1_CR1 |= (1u << 7u); 
@@ -63,6 +63,8 @@ void USART1_SEND_MSG(uint8_t *msg, uint8_t len)
     return;
 }
 
+// RX 
+uint8_t RXbuffer[64];
 
 void USART1_IRQHandler(void)
 {
@@ -72,7 +74,7 @@ void USART1_IRQHandler(void)
         {
             if(USART1_SR & (1u << 7u) && cnt < (msg_len-1)) // STATUS REGISTER TXE
             {
-                USART1_DR = buffer[cnt]; // TXE flag is reset by writing to DR
+                USART1_DR = TXbuffer[cnt]; // TXE flag is reset by writing to DR
                 cnt++;
             }
         }
