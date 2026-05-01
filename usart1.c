@@ -68,10 +68,12 @@ uint8_t RXbuffer[64];
 
 void USART1_IRQHandler(void)
 {
-    if(!(USART1_SR & (1u << 5u)))
+    if(!(USART1_SR & (1u << 5u))) // checking RXNE bit
     {
-        if(!(USART1_SR & (1u << 6u)))
+        //transmitting
+        if(!(USART1_SR & (1u << 6u))) // checkign TC bit
         {
+            //mid transmission
             if(USART1_SR & (1u << 7u) && cnt < (msg_len-1)) // STATUS REGISTER TXE
             {
                 USART1_DR = TXbuffer[cnt]; // TXE flag is reset by writing to DR
@@ -80,6 +82,8 @@ void USART1_IRQHandler(void)
         }
         else
         {
+            //transmisison ended
+
             //disabling transmit
             USART1_CR1 &= ~(1u << 3u); 
 
@@ -89,6 +93,7 @@ void USART1_IRQHandler(void)
     }
     else
     {
+        //recieving
         uint8_t rx = USART1_DR;
 
         USART1_SEND_MSG(&rx, sizeof(rx));

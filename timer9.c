@@ -87,8 +87,8 @@ void TIM9_SETUP(void)
     
     // 16 MHz / (15999 + 1) = 1 kHz timer tick
     TIM9_PSC = 15999;
-    // 1 kHz / (999 + 1) = 1 Hz update event (toggle every interrupt => 0.5 Hz blink)
-    TIM9_ARR = 999;
+    // 1 kHz / (499 + 1) = 2 Hz update event (toggle every interrupt => 1 Hz blink)
+    TIM9_ARR = 499;
     /*
     // Generate an update event so PSC/ARR are loaded immediately
     TIM9_EGR |= (1u << 0u);
