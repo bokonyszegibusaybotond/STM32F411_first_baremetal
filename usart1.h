@@ -27,6 +27,6 @@ void USART1_IRQHandler(void);
 void USART1_BAUD(void);
 void USART1_SENDBYTE(uint8_t MES);
 
-uint8_t RXbuffer[64];
+extern uint8_t RXbuffer[64];
 
 #endif

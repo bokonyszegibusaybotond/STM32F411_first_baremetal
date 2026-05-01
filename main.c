@@ -47,6 +47,7 @@ registers needed for led blink on PC13 GPIO
 #include "timer9.h"
 #include "usart1.h"
 #include "extint.h"
+#include "dma.h"
 
 static void setup()
 {
@@ -69,8 +70,10 @@ static void setup()
 
     TIM9_START();
 
+    DMA2_STREAM5_INIT();
+
     USART1_INIT();
-    uint8_t tosend[] = "Hello World!\n";
+    uint8_t tosend[] = "Hello World!\r";
     USART1_SEND_MSG(tosend, sizeof(tosend));
     
     EXTI_ENABLE();

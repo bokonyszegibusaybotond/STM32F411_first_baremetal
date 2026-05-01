@@ -3,7 +3,7 @@
 #include "register.h"
 
 
-void DMA_INIT(void)
+void DMA2_STREAM5_INIT()
 {
     //USART1
         //USART1 dma request channels are:
@@ -41,13 +41,28 @@ void DMA_INIT(void)
     //transfer length to 8 bytes
     DMA2_S5NDTR = 8u; 
 
+    //enabling circular mode
+    DMA2_S5CR |= (1u << 8u);
+
+    //setting source and destination adresses
+    DMA2_S5PAR = (uint32_t)&USART1_DR;
+    DMA2_S5M0AR = (uint32_t)&RXbuffer;
+
+    //enablin interrupt line
+    NVIC_ISER0 |= (1 << 16);
+
     //enable the dma
     DMA2_S5CR |= 1u;
-    
 }
-
+ 
 void DMA2_STREAM5_IRQHandler()
 {
-    
+    uint8_t msg[] = "dma int\r";
+    USART1_SEND_MSG(msg, sizeof(msg));
+    if(DMA2_HISR & (1u << 11)) //transmission complete flag check for stream5 of DMA2
+    {
+        DMA2_HIFCR = DMA2_HISR;
+        USART1_SEND_MSG(RXbuffer, 8);
+    }
 }
 

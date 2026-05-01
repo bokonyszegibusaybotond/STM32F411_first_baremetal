@@ -19,10 +19,14 @@ void USART1_INIT(void)
 
     //setting baud rate to 9600
     USART1_BRR = 3 + (104 << 4u);
+    //enabling recieve
+    USART1_CR1 |= (1u << 2u); 
+    
+    // setting recieve not empty interrupt enable
+    //USART1_CR1 |= (1u << 5u); 
 
-    USART1_CR1 |= (1u << 2u); //enabling recieve
-
-    USART1_CR1 |= (1u << 5u); // enabling recieve not empty interrupt enable
+    //setting DMA enable reciever bit
+    USART1_CR3 |= (1u << 6u); 
 
 }
 
@@ -94,9 +98,8 @@ void USART1_IRQHandler(void)
     else
     {
         //recieving
-        uint8_t rx = USART1_DR;
+        // uint8_t rx = USART1_DR;
 
-        USART1_SEND_MSG(&rx, sizeof(rx));
     }
 }
 

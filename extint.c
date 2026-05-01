@@ -23,12 +23,11 @@ void EXTI_ENABLE()
     NVIC_ISER0 |= (1 << 6);
 
 }
-static int cnt = 0;
 void EXTI0_IRQHandler(void)
 {
 
     //reset pendig bit
     EXTI_PR = EXTI_PR;
-    uint8_t tosend[] = "alma\n";
+    uint8_t tosend[] = "alma\r";
     USART1_SEND_MSG(tosend, sizeof(tosend));
 }
